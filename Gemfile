@@ -13,7 +13,7 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use haml for markup for language for HTML
-gem 'haml-rails', '~> 0.9.0'
+gem 'haml-rails'
 # Font Awesome Library
 gem 'font-awesome-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -70,4 +70,7 @@ group :test do
 
   # Use rubocop for conforming to Ruby style guide
   gem 'rubocop', '~> 0.41.1'
+
+  # Additional test functions for RSpec
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
