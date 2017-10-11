@@ -1,3 +1,19 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.user-profile-block {
+  background: $background-color;
+  border-radius: $padding-px;
+  border: thin $border-color solid;
+  margin-right: $padding-em;
+  padding: $padding-em;
+  line-height: $user-info-line-height;
+}
+
+.edit-user-block {
+  padding-bottom: $padding-em;
+  border-radius: $padding-px;
+  border: thin $border-color solid;
+}
