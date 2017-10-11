@@ -1,5 +1,10 @@
 require 'rails_helper'
 
+MAX_NAME_LEN = 127
+MAX_EMAIL_LEN = 255
+MAX_HANDLE_LEN = 15
+MIN_PASSWORD_LEN = 6
+
 RSpec.describe User, type: :model do
   let(:name) { 'Test User' }
   let(:email) { 'validemail@twitter.com' }
@@ -32,7 +37,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'name cannot be more than 127 characters' do
-      let(:name) { 'a' * 128 }
+      let(:name) { 'a' * (MAX_NAME_LEN + 1) }
       it { is_expected.to be_invalid }
     end
 
@@ -47,7 +52,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'email cannot be more than 255 characters' do
-      let(:email) { ('a' * 244) + '@twitter.com' }
+      let(:email) { ('a' * (MAX_EMAIL_LEN - 11)) + '@twitter.com' }
       it { is_expected.to be_invalid }
     end
 
@@ -65,7 +70,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'handle cannot be more than 15 characters' do
-      let(:handle) { 'a' * 16 }
+      let(:handle) { 'a' * (MAX_HANDLE_LEN + 1) }
       it { is_expected.to be_invalid }
     end
 
@@ -88,8 +93,8 @@ RSpec.describe User, type: :model do
     end
 
     context 'password cannot be less than six characters' do
-      let(:password) { 'a' * 5 }
-      let(:password_confirmation) { 'a' * 5 }
+      let(:password) { 'a' * (MIN_PASSWORD_LEN - 1) }
+      let(:password_confirmation) { 'a' * (MIN_PASSWORD_LEN - 1) }
       it { is_expected.to be_invalid }
     end
   end
