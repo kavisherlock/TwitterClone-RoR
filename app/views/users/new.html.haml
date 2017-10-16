@@ -1,12 +1,14 @@
 - provide(:title, 'Sign up')
 .container
   .row
-    .col-md-6.col-md-offset-3.edit-user-block
-      %h1 Sign up
-      = bootstrap_form_for(@user) do |f|
-        = f.text_field :name
-        = f.email_field :email
-        = f.text_field :handle
-        = f.password_field :password
-        = f.password_field :password_confirmation
-        = f.submit 'Sign Up'
+    .col-md-8.col-md-offset-2.edit-user-block
+      .col-md-10.col-md-offset-1
+        %h1 Sign up
+        %hr
+        = bootstrap_form_for(@user) do |f|
+          = f.text_field :name
+          = f.email_field :email
+          = f.text_field :handle
+          = f.password_field :password
+          = f.password_field :password_confirmation
+          = f.submit 'Sign Up'

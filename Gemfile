@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Use jquery as the JavaScript library
+gem 'jquery'
+gem 'jquery-rails'
+# Use jquery to autocomplete searching
+gem 'jquery-ui-rails'
+gem 'activerecord-session_store'
 gem 'bootstrap_form'
 gem 'bootstrap-will_paginate'
 # Ability to select more than one attribute
@@ -78,6 +84,9 @@ group :test do
 
   # Used for generating fake data
   gem 'faker', '~> 1.4.3'
+
+  # assigns has been extracted to a gem
+  gem 'rails-controller-testing'
 
   # Use rspec for testing
   gem 'rspec-rails'

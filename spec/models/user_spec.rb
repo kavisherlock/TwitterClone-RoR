@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 MAX_NAME_LEN = 127
 MAX_EMAIL_LEN = 255
@@ -12,6 +13,7 @@ RSpec.describe User, type: :model do
   let(:handle) { 'TestUser' }
   let(:password) { 'Password' }
   let(:password_confirmation) { 'Password' }
+  let(:remember_digest) { nil }
 
   let(:user) do
     User.new(
@@ -20,7 +22,8 @@ RSpec.describe User, type: :model do
       email: email,
       handle: handle,
       password: password,
-      password_confirmation: password_confirmation
+      password_confirmation: password_confirmation,
+      remember_digest: remember_digest
     )
   end
 
@@ -96,6 +99,76 @@ RSpec.describe User, type: :model do
       let(:password) { 'a' * (MIN_PASSWORD_LEN - 1) }
       let(:password_confirmation) { 'a' * (MIN_PASSWORD_LEN - 1) }
       it { is_expected.to be_invalid }
+    end
+  end
+
+  describe '#self.digest' do
+    context 'Returns a valid hash digest for given string' do
+      it 'min cost is not nil' do
+        expect(User.digest('string')).to_not be_nil
+      end
+
+      it 'min cost is nil' do
+        allow(ActiveModel::SecurePassword).to receive(:min_cost).and_return(nil)
+        expect(User.digest('string')).to_not be_nil
+      end
+    end
+  end
+
+  describe '#self.new_token' do
+    context 'Returns a valid random token' do
+      it do
+        expect(User.new_token).to_not be_nil
+      end
+    end
+  end
+
+  describe '#remember' do
+    context 'Remember a user correctly' do
+      let(:remember_token) { 'remember token' }
+      let(:new_remember_digest) { 'remember digest' }
+
+      before do
+        allow(User).to receive(:new_token).and_return(remember_token)
+        allow(User).to receive(:digest)
+          .with(remember_token)
+          .and_return(new_remember_digest)
+      end
+
+      it do
+        user.remember
+        expect(user.remember_digest).to eq(new_remember_digest)
+      end
+    end
+  end
+
+  describe '#authenticated?' do
+    let(:remember_digest) { 'remember digest' }
+
+    before do
+      allow_any_instance_of(User).to receive(:logged_in?).and_return(false)
+      allow(BCrypt::Password).to receive(:new)
+        .and_return(BCrypt::Password.create(remember_digest))
+    end
+
+    it 'User is authenticated' do
+      expect(user.authenticated?(remember_digest)).to be true
+    end
+
+    it 'User is not authenticated' do
+      expect(user.authenticated?('invalid')).to be false
+    end
+  end
+
+  describe '#forget' do
+    context 'Remember a user correctly' do
+      let(:remember_digest) { 'remember digest' }
+
+      it do
+        expect(user.remember_digest).to eq(remember_digest)
+        user.forget
+        expect(user.remember_digest).to be_nil
+      end
     end
   end
 end
