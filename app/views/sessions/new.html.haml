@@ -1,0 +1,22 @@
+- provide(:title, 'Log in')
+.container
+  .row
+    .col-md-11.login-block
+      .welcome-block
+        = image_tag('dark-logo.png', class: 'logo')
+        %h1 WELCOME
+        %h1 TO
+        %h1.not-twitter NOT TWITTER
+        %hr
+        %p Just like Twitter, but not Twitter
+      .col-md-6.col-md-offset-6
+        %h1 Log in
+        %hr
+        = bootstrap_form_for(:session, url: login_path) do |f|
+          = f.email_field :email, class: 'form-control'
+          = f.password_field :password, class: 'form-control'
+          = link_to "(Forgot Password?)", root_path
+          = f.check_box :remember_me
+          = f.submit "Log in", class: "btn btn-primary login-button"
+        %br/
+        = link_to "Not a member yet? Sign up now!", signup_path, class: "btn btn-info"

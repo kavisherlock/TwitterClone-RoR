@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
+ *= require jquery-ui/autocomplete
  */
 
 @import "variables";
@@ -29,8 +31,18 @@ html {
 
 body {
   font-size: 1.6em;
+  font-family: verdana;
+  background-color: $background-color;
+  color: $normal-text;
   padding-top: $padding-px * 7;
   margin-bottom: $padding-px * 6;
+}
+
+.header {
+  .header-logo {
+    height: $padding-px * 4;
+    margin: $padding-px * 0.5;
+  }
 }
 
 .footer {
