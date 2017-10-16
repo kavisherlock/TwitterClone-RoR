@@ -1,26 +1,34 @@
 require 'rails_helper'
 
-PAGE_TITLE = 'Sign up | NotTwitter'.freeze
+SIGNUP_PAGE_TITLE = 'Sign up | NotTwitter'.freeze
 
-feature 'SignUp page' do
+feature 'Sign up page' do
+  scenario 'Sign up form' do
+    visit '/signup'
+    expect(page).to have_title SIGNUP_PAGE_TITLE
+    expect(page).to have_css 'h1', text: 'Sign up'
+    expect(page).to have_css 'form', class: 'new_user'
+    expect(page).to have_css 'label', text: 'Name'
+    expect(page).to have_css 'input', id: 'user_name'
+    expect(page).to have_css 'label', text: 'Email'
+    expect(page).to have_css 'input', id: 'user_email'
+    expect(page).to have_css 'label', text: 'Handle'
+    expect(page).to have_css 'input', id: 'user_handle'
+    expect(page).to have_css 'label', text: 'Password'
+    expect(page).to have_css 'input', id: 'user_password'
+    expect(page).to have_css 'label', text: 'Password confirmation'
+    expect(page).to have_css 'input', id: 'user_password_confirmation'
+  end
+
   scenario 'Successful Sign Up' do
     visit '/signup'
-    expect(page).to have_title PAGE_TITLE
-    expect(page).to have_css 'h1', text: 'Sign up'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
     expect(current_path).to eql(user_path(1))
-    expect(page).to have_content 'Not Twitter User successfully created User'
-    expect(page).to have_css 'h1', text: 'User'
-    expect(page).to have_css 'strong', text: 'Email:'
-    expect(page).to have_css 'p', text: 'user@example.com'
-    expect(page).to have_css 'strong', text: 'Handle:'
-    expect(page).to have_css 'p', text: 'user'
+    expect(page).to have_content 'User successfully created'
   end
 
   scenario 'Empty input in Sign Up' do
     visit '/signup'
-    expect(page).to have_title PAGE_TITLE
-    expect(page).to have_css 'h1', text: 'Sign up'
     sign_up_with('', '', '', '', '')
     expect(page).to have_content 'Namecan\'t be blank'
     expect(page).to have_content 'Emailcan\'t be blank'
@@ -30,8 +38,6 @@ feature 'SignUp page' do
 
   scenario 'Bad input in Sign Up' do
     visit '/signup'
-    expect(page).to have_title PAGE_TITLE
-    expect(page).to have_css 'h1', text: 'Sign up'
     sign_up_with('a' * 128, 'a', 'a' * 16, 'pass', 'password')
     expect(page).to have_content 'Nameis too long (maximum is 127 characters)'
     expect(page).to have_content 'Emailis invalid'
@@ -42,21 +48,17 @@ feature 'SignUp page' do
 
   scenario 'Dupilcate email and handle' do
     visit '/signup'
-    expect(page).to have_title PAGE_TITLE
-    expect(page).to have_css 'h1', text: 'Sign up'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
-    expect(page).to have_content 'Not Twitter User successfully created User'
+    expect(page).to have_content 'User successfully created'
 
     visit '/signup'
-    expect(page).to have_title PAGE_TITLE
-    expect(page).to have_css 'h1', text: 'Sign up'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
     expect(page).to have_content 'Emailduplicate email'
     expect(page).to have_content 'Handleduplicate handle'
   end
 
   def sign_up_with(name, email, handle, password, password_confirmation)
-    visit '/signup' # sign_up_path
+    visit signup_path
     fill_in 'Name', with: name
     fill_in 'Email', with: email
     fill_in 'Handle', with: handle

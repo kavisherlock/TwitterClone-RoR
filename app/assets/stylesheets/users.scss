@@ -4,7 +4,7 @@
 @import "variables";
 
 .user-profile-block {
-  background: $background-color;
+  background: $lighter-background-color;
   border-radius: $padding-px;
   border: thin $border-color solid;
   margin-right: $padding-em;
@@ -13,6 +13,7 @@
 }
 
 .edit-user-block {
+  background: $lighter-background-color;
   padding-bottom: $padding-em;
   border-radius: $padding-px;
   border: thin $border-color solid;
