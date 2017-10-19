@@ -1,0 +1,4 @@
+.user-profile-block
+  = gravatar_for user
+  %h1= user.name
+  %p= "@#{user.handle}"

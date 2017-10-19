@@ -4,15 +4,15 @@
 @import "variables";
 
 .login-block {
-  padding-bottom: $padding-em;
+  padding-bottom: $padding-px * 2;
   border-radius: $padding-px;
   border: thin $border-color solid;
   background-color: $lighter-background-color;
+  display: inline-block;
 
   .welcome-block {
     background-color: $theme-color;
     border-radius: $padding-px;
-    float: left;
     width: 45%;
     height: 100%;
     margin-left: -15px;

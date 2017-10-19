@@ -26,7 +26,7 @@ feature 'Log in page' do
   scenario 'Successful log in' do
     user = FactoryGirl.create(:user)
     login_with(user.email, user.password, false)
-    expect(current_path).to eql(user_path(user.id))
+    expect(current_path).to eql(home_path)
     expect(page).to have_content 'Welcome ' + user.name + '!!'
   end
 
@@ -45,7 +45,6 @@ feature 'Log in page' do
   scenario 'Remember me saves cookies' do
     user = FactoryGirl.create(:user)
     login_with(user.email, user.password, true)
-    expect(current_path).to eql(user_path(user.id))
     expect(page).to have_content 'Welcome ' + user.name + '!!'
     expect(Capybara.current_session.driver.request.cookies.[]('user_id'))
       .to_not be_nil
@@ -62,10 +61,10 @@ feature 'Log in page' do
   scenario 'Successful log out' do
     user = FactoryGirl.create(:user)
     login_with(user.email, user.password, false)
-    expect(current_path).to eql(user_path(user.id))
+    expect(current_path).to eql(home_path)
     click_link 'Account'
     click_link 'Log out'
-    expect(current_path).to eql(root_path)
+    expect(current_path).to eql(login_path)
   end
 
   def login_with(email, password, remember_me)
