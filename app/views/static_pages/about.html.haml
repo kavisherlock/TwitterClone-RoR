@@ -1,0 +1,39 @@
+- provide(:title, "About")
+
+.container
+  .row
+    %h1 About
+    .headline
+      %hr
+  .row
+    .about.about-first
+      %p NotTwitter is
+      %h2 what’s happening in the world.
+  .row
+    .about.about-second
+      %p See
+      %h2 what people are saying.
+  .row
+    .about.about-first
+      %p Start
+      %h2 a global conversaion.
+  .row
+    .about.about-second
+      %p Follow
+      %h2 those who inspire you.
+  .row
+    .about.about-first
+      %p Inspire
+      %h2 others.
+  .row
+    .about.about-second
+      - if logged_in?
+        %p Be part of something bigger
+        %hr
+        = link_to "Home", home_path, class: "btn btn-lg btn-success"
+      - else
+        %p Join us now
+        %hr
+        = link_to "Not Twitter", signup_path, class: "btn btn-lg btn-success"
+
+%p Whatever we are, we are definitely not Twitter.
