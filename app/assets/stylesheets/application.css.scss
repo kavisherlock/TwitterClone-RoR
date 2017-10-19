@@ -39,19 +39,34 @@ body {
 }
 
 .header {
+  margin-right: $padding-px * -1.5;
+
   .header-logo {
     height: $padding-px * 4;
     margin: $padding-px * 0.5;
   }
+
+  li:hover {
+    background-color: $background-color;
+  }
 }
 
 .footer {
-  background-color: $background-color;
+  color: $normal-text;
   left: 0;
   bottom: 0;
-  height: $padding-px * 4;
   position: absolute;
   width: 100%;
+  border-top: 2px $border-color solid;
+
+  div {
+    padding-right: 15%;
+
+    li:hover {
+      color: $normal-text;
+      background-color: $background-color;
+    }
+  }
 }
 
  @mixin box_sizing {

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
+  get 'home' => 'static_pages#home'
+  get 'about' => 'static_pages#about'
+  get 'contact' => 'static_pages#contact'
+  get 'help' => 'static_pages#help'
 
-  root 'sessions#new'
+  root 'static_pages#home'
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
   get 'login' => 'sessions#new'

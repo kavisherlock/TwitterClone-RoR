@@ -1,12 +1,5 @@
 - provide(:title, @user.name)
 .container
   .row
-    .col-sm-3.user-profile-block
-      = gravatar_for @user
-      %h1= @user.name
-      %p
-        %strong Email:
-        = @user.email
-      %p
-        %strong Handle:
-        = @user.handle
+    .col-sm-4
+      = render 'partials/user_profile_info', user: @user

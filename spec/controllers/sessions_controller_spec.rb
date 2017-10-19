@@ -3,24 +3,6 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   let(:user) { FactoryGirl.build(:user) }
 
-  describe('#new') do
-    before do
-      allow(controller).to receive(:current_user).and_return(user)
-    end
-
-    it 'redirects to user on login' do
-      allow(controller).to receive(:logged_in?).and_return(true)
-      get :new
-      expect(controller).to redirect_to user
-    end
-
-    it 'does not redirect to user on failed login' do
-      allow(controller).to receive(:logged_in?).and_return(false)
-      get :new
-      expect(controller).to_not redirect_to user
-    end
-  end
-
   describe '#create' do
     let(:remember_me) { '1' }
 
@@ -65,7 +47,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it 'redirects to user on login' do
-        expect(controller).to redirect_to user
+        expect(controller).to redirect_to home_path
       end
     end
 
