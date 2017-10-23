@@ -49,6 +49,11 @@ gem 'bcrypt', '~> 3.1.7'
 # Javascript typeahead library from twitter
 gem 'twitter-typeahead-rails', '~> 0.11.1'
 
+# Used for generating fake data
+gem 'faker', '~> 1.4.3'
+
+gem 'will_paginate'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -81,9 +86,6 @@ group :test do
 
   # Factory tool used in test
   gem 'factory_girl_rails', '~> 4.7.0'
-
-  # Used for generating fake data
-  gem 'faker', '~> 1.4.3'
 
   # assigns has been extracted to a gem
   gem 'rails-controller-testing'
