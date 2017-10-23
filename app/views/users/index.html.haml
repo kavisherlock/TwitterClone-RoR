@@ -1,0 +1,12 @@
+- provide(:title, 'Users')
+.container
+  .row
+    %h1 Users
+  = will_paginate @users
+  .row
+    .col-sm-6.users-list
+      %ul
+        = render @users
+  = will_paginate
+  .row
+    = link_to 'New User', new_user_path, class: "btn btn-info users-buttons"

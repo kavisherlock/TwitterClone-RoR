@@ -6,6 +6,7 @@ FactoryGirl.define do
     handle { name.to_s.slice(0, 15) }
     password { 'password' }
     password_confirmation { 'password' }
+    admin { false }
   end
 
   factory :user2, class: User do
@@ -15,5 +16,6 @@ FactoryGirl.define do
     handle { name.to_s.slice(0, 15) }
     password { 'password' }
     password_confirmation { 'password' }
+    admin { true }
   end
 end
