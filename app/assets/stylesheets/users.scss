@@ -18,3 +18,16 @@
   border-radius: $padding-px;
   border: thin $border-color solid;
 }
+
+.users-list {
+  margin-top: $padding-px * -2;
+  margin-left: $padding-px * -2;
+}
+
+.list-user {
+  padding: $padding-px $padding-px $padding-px 0;
+  list-style-type: none;
+
+  .user-delete-button {
+  }
+}

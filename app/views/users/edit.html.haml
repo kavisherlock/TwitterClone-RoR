@@ -1,0 +1,8 @@
+- provide(:title, 'Edit Profile')
+.container
+  .row
+    .col-md-8.col-md-offset-2.edit-user-block
+      .col-md-10.col-md-offset-1
+        %h1 Edit Profile
+        %hr
+        = render 'partials/user_profile_edit', user: @user, title: 'Save Profile'
