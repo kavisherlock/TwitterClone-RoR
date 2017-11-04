@@ -31,3 +31,9 @@
   .user-delete-button {
   }
 }
+
+.tweats-list {
+  border: 1px $border-color solid;
+  border-radius: $padding-px;
+  list-style-type: none;
+}
