@@ -66,6 +66,32 @@ feature 'User Edit Profile page' do
   end
 end
 
+feature 'Tweating from the profile page' do
+  scenario 'User tweat shows on page' do
+    user = FactoryGirl.create(:user)
+    visit login_path
+    login_with(user.email, user.password, false)
+    visit "/users/#{user.id}"
+    tweat('content')
+    expect(page).to have_css '.tweat'
+    expect(page).to have_css '.user a', text: user.name
+    expect(page).to have_css '.content', text: 'content'
+    expect(page).to have_css '.timestamp',
+                             text: 'Posted less than a minute ago.'
+    expect(page).to have_css 'a', text: 'Delete'
+  end
+
+  scenario 'User deletes tweat' do
+    user = FactoryGirl.create(:user)
+    visit login_path
+    login_with(user.email, user.password, false)
+    visit "/users/#{user.id}"
+    tweat('content')
+    click_link 'Delete'
+    expect(page).to_not have_css '.tweat'
+  end
+end
+
 def login_with(email, password, remember_me)
   fill_in 'Email', with: email
   fill_in 'Password', with: password
@@ -80,4 +106,9 @@ def update_to(name, email, handle, password, password_confirmation)
   fill_in 'Password', with: password
   fill_in 'Password confirmation', with: password_confirmation
   click_button 'Save Profile'
+end
+
+def tweat(content)
+  fill_in 'tweat_content', with: content
+  click_button 'Post'
 end

@@ -105,7 +105,7 @@ RSpec.describe UsersController, type: :controller do
     context 'user is successfully created' do
       let(:save_flag) { true }
 
-      it 'redirects to the user show users page' do
+      it 'redirects to the user\'s page' do
         subject
         expect(controller).to redirect_to user
       end
@@ -114,7 +114,7 @@ RSpec.describe UsersController, type: :controller do
     context 'user failed to be created' do
       let(:save_flag) { false }
 
-      it 'redirects to the user show users page' do
+      it 'does not redirect to the user\'s page' do
         subject
         expect(controller).to_not redirect_to user
       end
@@ -288,8 +288,12 @@ RSpec.describe UsersController, type: :controller do
         allow(user).to receive(:destroy)
       end
 
-      context 'current user does not have access' do
+      context 'current user has access' do
         let(:admin) { true }
+
+        before do
+          allow(controller).to receive(:current_user?).and_return(false)
+        end
 
         it 'should show a flash message' do
           subject
@@ -308,6 +312,24 @@ RSpec.describe UsersController, type: :controller do
         it 'redirects the user to root' do
           subject
           expect(response).to redirect_to(root_url)
+        end
+      end
+
+      context 'current user deleting itself' do
+        let(:admin) { true }
+
+        before do
+          allow(controller).to receive(:current_user?).and_return(true)
+        end
+
+        it 'should show a flash message' do
+          subject
+          expect(flash[:info]).to eq('Can\'t delete yourself.')
+        end
+
+        it 'redirects to user index' do
+          subject
+          expect(response).to redirect_to users_path
         end
       end
     end

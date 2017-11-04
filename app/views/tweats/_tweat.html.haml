@@ -1,0 +1,11 @@
+%li.tweat.tweat{:id => "tweat-#{tweat.id}"}
+  = link_to gravatar_for(tweat.user), tweat.user, class: "user-pic"
+  .user
+    %strong= link_to tweat.user.name, tweat.user, class: "user-item"
+  .content
+    = tweat.content
+  .timestamp
+    Posted #{time_ago_in_words(tweat.created_at)} ago.
+    %div
+      - if current_user?(tweat.user)
+        = link_to "Delete", tweat, method: :delete, data: { confirm: "You sure?" }, class: "btn-xs"

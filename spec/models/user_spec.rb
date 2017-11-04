@@ -171,4 +171,15 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'dependent destroy' do
+    context 'user gets destoryed' do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:tweat) { user.tweats.build(content: 'content') }
+
+      it 'tweat gets destroyed with user' do
+        expect { user.destroy.to change { Tweat.count }.by(-1) }
+      end
+    end
+  end
 end

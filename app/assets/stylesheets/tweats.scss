@@ -1,0 +1,59 @@
+// Place all the styles related to the Tweats controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.tweat {
+  padding: $padding-px * 2;
+  margin-left: $padding-px * -4;
+  border-bottom: 1px $border-color solid;
+
+  .user-pic {
+    float: left;
+    padding-right: $padding-px;
+  }
+
+  .timestamp {
+		text-align: right;
+    vertical-align: text-bottom;
+		color: $logo-color;
+		margin-bottom: $padding-px;
+    font-size: small;
+
+		.btn-xs {
+			background: $background-color;
+			border: $border-color;
+			color: $errors;
+			font-size: $padding-px;
+		}
+
+		.btn-xs:hover{
+			text-decoration: none;
+			color: $background-color;
+			background: $errors;
+		}
+	}
+
+	&:hover {
+		background: $theme-color;
+	}
+}
+
+.new-tweat-block {
+  border: 1px $border-color solid;
+  border-radius: $padding-px;
+  padding: $padding-px * 2;
+  margin-top: $padding-em;
+  margin-left: $padding-em * -1;
+
+  .field {
+    padding-bottom: $padding-px;
+  }
+
+  .compose {
+    width: 100%;
+    padding: $padding-px;
+    border: 1px $border-color solid;
+    border-radius: $padding-px * 0.5;
+  }
+}
