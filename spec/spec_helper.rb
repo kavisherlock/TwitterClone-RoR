@@ -98,3 +98,10 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def login_with(email, password, remember_me)
+  fill_in 'Email', with: email
+  fill_in 'Password', with: password
+  check 'session_remember_me' if remember_me
+  click_button 'Log in'
+end

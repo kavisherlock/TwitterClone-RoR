@@ -180,6 +180,44 @@ RSpec.describe User, type: :model do
       it 'tweat gets destroyed with user' do
         expect { user.destroy.to change { Tweat.count }.by(-1) }
       end
+
+      it 'tweat gets destroyed with user' do
+        expect { user.destroy.to change { Relationship.count }.by(-1) }
+      end
+    end
+  end
+
+  describe '#following and unfollowing' do
+    context 'Follow another user' do
+      let(:follower) { FactoryGirl.create(:user) }
+      let(:followee) { FactoryGirl.create(:user2) }
+
+      it '#following' do
+        expect(follower.following?(followee)).to eq(false)
+        expect(follower.following.include?(followee)).to eq(false)
+        expect(followee.followers.include?(follower)).to eq(false)
+      end
+
+      it '#follow' do
+        expect do
+          follower.follow(followee).to change { Relationship.count }.by(1)
+        end
+        follower.follow(followee)
+        expect(follower.following?(followee)).to eq(true)
+        expect(follower.following.include?(followee)).to eq(true)
+        expect(followee.followers.include?(follower)).to eq(true)
+      end
+
+      it '#unfollow' do
+        follower.follow(followee)
+        expect do
+          follower.unfollow(followee).to change { Relationship.count }.by(-1)
+        end
+        follower.unfollow(followee)
+        expect(follower.following?(followee)).to eq(false)
+        expect(follower.following.include?(followee)).to eq(false)
+        expect(followee.followers.include?(follower)).to eq(false)
+      end
     end
   end
 end

@@ -2,5 +2,15 @@
   = link_to gravatar_for(user), user
   %h1= user.name
   %p= "@#{user.handle}"
+  .stats
+    %a{:href => home_path}
+      %strong= user.tweats.count
+      Tweats
+    %a{:href => "#{following_user_path(user)}"}
+      %strong#following= user.following.count
+      Following
+    %a{:href => "#{followers_user_path(user)}"}
+      %strong#followers= user.followers.count
+      Followers
   - if logged_in? && current_user.admin? && !current_user?(user)
     #{link_to "Delete", user, method: :delete, data: { confirm: 'You sure bitch?' }, class: 'btn btn-xs btn-danger user-delete-button'}

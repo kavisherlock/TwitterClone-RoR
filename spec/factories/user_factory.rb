@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:id) { |n| n }
+    sequence(:id) { 1 }
     name { SecureRandom.uuid }
     sequence(:email) { |n| "#{name}#{n + 1}@twitter.com" }
     handle { name.to_s.slice(0, 15) }
@@ -10,7 +10,7 @@ FactoryGirl.define do
   end
 
   factory :user2, class: User do
-    sequence(:id) { |n| n }
+    sequence(:id) { 2 }
     name { SecureRandom.uuid }
     sequence(:email) { |n| "#{name}#{n + 1}@twitter.com" }
     handle { name.to_s.slice(0, 15) }
