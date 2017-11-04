@@ -2,7 +2,8 @@
 class UsersController < ApplicationController
   USERS_PER_PAGE = 10
   TWEATS_PER_PAGE = 20
-  before_action :logged_in_user,        only: [:index, :edit, :update, :delete]
+  before_action :logged_in_user,        only: [:index, :edit, :update,
+                                               :delete, :following, :followers]
   before_action :correct_user,          only: [:edit, :update]
   before_action :admin_user,            only: :destroy
 
@@ -65,6 +66,22 @@ class UsersController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'User not found.'
     redirect_to request.referrer || users_url
+  end
+
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    @title = "People followed by #{@user.name}"
+    @emptymessage = 'You aren\'t following anyone :('
+    render 'showfollow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    @title = "People following #{@user.name}"
+    @emptymessage = 'You have no followers :(\nTry following some people!'
+    render 'showfollow'
   end
 
   private

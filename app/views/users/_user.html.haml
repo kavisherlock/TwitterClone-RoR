@@ -2,4 +2,4 @@
   = gravatar_for user
   = link_to user.name, user
   - if current_user.admin? && !current_user?(user)
-    | #{link_to "Delete", user, method: :delete, data: { confirm: 'You sure bitch?' }, class: 'btn btn-xs btn-danger user-delete-button'}
+    | #{link_to "Delete", user, method: :delete, data: { confirm: 'You sure bitch?' }, class: 'btn btn-xs btn-danger'}
