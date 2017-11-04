@@ -11,6 +11,7 @@ include SessionsHelper
 #  updated_at           :datetime         not null
 #
 class User < ApplicationRecord
+  has_many :tweats, dependent: :destroy
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
 
