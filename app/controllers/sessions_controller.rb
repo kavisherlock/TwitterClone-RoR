@@ -1,4 +1,4 @@
-#
+# Used for logging in and out the user.
 class SessionsController < ApplicationController
   def new
   end

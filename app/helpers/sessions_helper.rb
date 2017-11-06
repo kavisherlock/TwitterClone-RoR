@@ -1,4 +1,5 @@
-#
+# Helper methods for logging the user in and out and working with the currently
+# logged in user
 module SessionsHelper
   # Logs in the given user.
   def log_in(user)
