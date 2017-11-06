@@ -1,0 +1,11 @@
+- provide(:title, "Home")
+.container
+  .row
+    .col-sm-4
+      = render 'partials/user_profile_info', user: current_user
+      = render 'partials/new_tweat_form'
+    .col-sm-8
+      - if @tweats.any?
+        %ul.tweats-list
+          = render @tweats
+        = will_paginate @tweats

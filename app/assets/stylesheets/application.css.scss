@@ -1,0 +1,86 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require jquery-ui
+ *= require jquery-ui/autocomplete
+ */
+
+@import "variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-datetimepicker";
+@import "bootstrap-multiselect";
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+@import "font-awesome";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-size: 1.6em;
+  font-family: verdana;
+  background-color: $background-color;
+  color: $normal-text;
+  padding-top: $padding-px * 7;
+  margin-bottom: $padding-px * 6;
+}
+
+.header {
+  margin-right: $padding-px * -1.5;
+
+  .header-logo {
+    height: $padding-px * 4;
+    margin: $padding-px * 0.5;
+  }
+
+  li:hover {
+    background-color: $background-color;
+  }
+}
+
+.footer {
+  color: $normal-text;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  border-top: 2px $border-color solid;
+
+  div {
+    padding-right: 15%;
+
+    li:hover {
+      color: $normal-text;
+      background-color: $background-color;
+    }
+  }
+}
+
+ @mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}

@@ -1,0 +1,6 @@
+- if logged_in?
+  .new-tweat-block
+    = form_for(@tweat) do |f|
+      .field
+        = f.text_area :content, placeholder: "Compose new tweat...", class: "compose"
+      = f.submit "Post", class: "btn btn-primary"

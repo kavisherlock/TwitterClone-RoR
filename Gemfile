@@ -5,7 +5,22 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# Use jquery as the JavaScript library
+gem 'jquery'
+gem 'jquery-rails'
+# Use jquery to autocomplete searching
+gem 'jquery-ui-rails'
+gem 'activerecord-session_store'
+gem 'bootstrap_form'
+gem 'bootstrap-will_paginate'
+# Ability to select more than one attribute
+gem 'bootstrap-multiselect-rails', '~> 0.9.9'
+# Use bootstrap-sass for UI design
+gem 'bootstrap-sass', '3.3.5'
+# Used for adding rich text editor for organization home page customization
+gem 'bootstrap-wysihtml5-rails'
+# Used for datetime picker
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use Puma as the app server
@@ -13,7 +28,7 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use haml for markup for language for HTML
-gem 'haml-rails', '~> 0.9.0'
+gem 'haml-rails'
 # Font Awesome Library
 gem 'font-awesome-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,7 +45,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+# Javascript typeahead library from twitter
+gem 'twitter-typeahead-rails', '~> 0.11.1'
+
+# Used for generating fake data
+gem 'faker', '~> 1.4.3'
+
+gem 'will_paginate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -59,15 +81,27 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test do
+  # Use for integration testing for specific use-cases
+  gem 'capybara', '~> 2.15.0'
+
   # Factory tool used in test
   gem 'factory_girl_rails', '~> 4.7.0'
 
-  # Used for generating fake data
-  gem 'faker', '~> 1.4.3'
+  # assigns has been extracted to a gem
+  gem 'rails-controller-testing'
 
   # Use rspec for testing
   gem 'rspec-rails'
 
   # Use rubocop for conforming to Ruby style guide
   gem 'rubocop', '~> 0.41.1'
+
+  # Use simplecov for code coverage
+  gem 'simplecov', '~> 0.10.0', require: false
+
+  # Additional test functions for RSpec
+  gem 'shoulda-matchers', '~> 2.8.0'
+
+  # For Firefox
+  gem 'selenium-webdriver'
 end

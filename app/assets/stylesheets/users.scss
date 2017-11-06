@@ -1,0 +1,83 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.user-profile-block {
+  background: $lighter-background-color;
+  border-radius: $padding-px;
+  border: thin $border-color solid;
+  margin-left: $padding-em * -1;
+  padding: $padding-em;
+  line-height: $user-info-line-height;
+
+  .stats {
+    overflow: auto;
+    margin-top: 0;
+    padding: 0;
+    strong {
+      display: block;
+      padding-bottom: $padding-px;
+    }
+    a {
+  	  float: left;
+      padding: 10px;
+      border-left: 1px solid $logo-color;
+      color: $logo-color;
+      &:first-child {
+        padding-left: 0;
+        border: 0;
+      }
+      &:hover {
+        text-decoration: none;
+        color: $secondary-color;
+      }
+    }
+  }
+
+  .btn {
+    display: inline;
+    margin-top: $padding-px;
+    margin-bottom: $padding-px;
+  }
+}
+
+.follow-btn {
+  margin-top: $padding-px;
+  margin-left: $padding-px * -1;
+  width: 100%;
+}
+
+.user_avatars {
+  margin-left: $padding-px * -1;
+  padding: $padding-px * 0.5;
+  .gravatar {
+    margin-top: $padding-px * 0.5;
+  }
+}
+
+.edit-user-block {
+  background: $lighter-background-color;
+  padding-bottom: $padding-em;
+  border-radius: $padding-px;
+  border: thin $border-color solid;
+}
+
+.users-list {
+  margin-top: $padding-px * -2;
+  margin-left: $padding-px * -2;
+}
+
+.list-user {
+  padding: $padding-px $padding-px $padding-px 0;
+  list-style-type: none;
+
+  .user-delete-button {
+  }
+}
+
+.tweats-list {
+  border: 1px $border-color solid;
+  border-radius: $padding-px;
+  list-style-type: none;
+}
