@@ -1,4 +1,4 @@
-#
+# Used to manage user profiles and tweats
 class UsersController < ApplicationController
   USERS_PER_PAGE = 10
   TWEATS_PER_PAGE = 20

@@ -1,4 +1,4 @@
-#
+# Used to create and destroy tweats posted by the user
 class TweatsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
@@ -24,10 +24,12 @@ class TweatsController < ApplicationController
 
   private
 
+  # Never trust parameters from the `scary internet, only allow the white list.
   def tweat_params
     params.require(:tweat).permit(:content)
   end
 
+  # Confirms the correct user.
   def correct_user
     if current_user
       @tweat = current_user.tweats.find_by(id: params[:id])
