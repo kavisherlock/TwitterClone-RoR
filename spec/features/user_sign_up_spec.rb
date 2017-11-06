@@ -4,7 +4,7 @@ SIGNUP_PAGE_TITLE = 'Sign up | NotTwitter'.freeze
 
 feature 'Sign up page' do
   scenario 'Sign up form' do
-    visit '/signup'
+    visit signup_path
     expect(page).to have_title SIGNUP_PAGE_TITLE
     expect(page).to have_css 'h1', text: 'Sign up'
     expect(page).to have_css 'form', class: 'new_user'
@@ -21,14 +21,12 @@ feature 'Sign up page' do
   end
 
   scenario 'Successful Sign Up' do
-    visit '/signup'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
     expect(current_path).to eql(user_path(1))
     expect(page).to have_content 'User successfully created'
   end
 
   scenario 'Empty input in Sign Up' do
-    visit '/signup'
     sign_up_with('', '', '', '', '')
     expect(page).to have_content 'Namecan\'t be blank'
     expect(page).to have_content 'Emailcan\'t be blank'
@@ -37,7 +35,6 @@ feature 'Sign up page' do
   end
 
   scenario 'Bad input in Sign Up' do
-    visit '/signup'
     sign_up_with('a' * 128, 'a', 'a' * 16, 'pass', 'password')
     expect(page).to have_content 'Nameis too long (maximum is 127 characters)'
     expect(page).to have_content 'Emailis invalid'
@@ -47,11 +44,9 @@ feature 'Sign up page' do
   end
 
   scenario 'Dupilcate email and handle' do
-    visit '/signup'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
     expect(page).to have_content 'User successfully created'
 
-    visit '/signup'
     sign_up_with('User', 'user@example.com', 'user', 'password', 'password')
     expect(page).to have_content 'Emailduplicate email'
     expect(page).to have_content 'Handleduplicate handle'

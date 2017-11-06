@@ -12,6 +12,15 @@ include SessionsHelper
 #
 class User < ApplicationRecord
   has_many :tweats, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name:  'Relationship',
+                                   foreign_key: 'followee_id',
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followee
+  has_many :followers, through: :passive_relationships, source: :follower
+
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
 
@@ -61,5 +70,28 @@ class User < ApplicationRecord
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Defines a news feed.
+  def feed
+    following_ids = "SELECT followee_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Tweat.where("user_id IN (#{following_ids}) OR user_id = :user_id",
+                user_id: id)
+  end
+
+  # Follows a user.
+  def follow(followee)
+    active_relationships.create(followee_id: followee.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(followee)
+    active_relationships.find_by(followee_id: followee.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 end

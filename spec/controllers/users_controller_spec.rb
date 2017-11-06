@@ -334,4 +334,61 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe '#following' do
+    let(:page) { 1 }
+
+    before do
+      allow(controller).to receive(:logged_in?).and_return(true)
+      allow(User).to receive(:find).and_return(user)
+      get :following, params: { id: id, page: page }
+    end
+
+    context 'Following page' do
+      it 'has http status ok' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'ensures that title is correct' do
+        expect(assigns(:title)).to eq("People followed by #{user.name}")
+      end
+
+      it 'ensures that message displayed is correct' do
+        expect(assigns(:emptymessage)).to eq('You aren\'t following anyone :(')
+      end
+
+      it 'renders the showfollow view' do
+        expect(response).to render_template(:showfollow)
+      end
+    end
+  end
+
+  describe '#followers' do
+    let(:page) { 1 }
+
+    before do
+      allow(controller).to receive(:logged_in?).and_return(true)
+      allow(User).to receive(:find).and_return(user)
+      get :followers, params: { id: id, page: page }
+    end
+
+    context 'Followers page' do
+      it 'has http status ok' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'ensures that title is correct' do
+        expect(assigns(:title)).to eq("People following #{user.name}")
+      end
+
+      it 'ensures that message displayed is correct' do
+        expect(assigns(:emptymessage))
+          .to eq('You have no followers :(\nTry following some people!')
+      end
+
+      it 'renders the showfollow view' do
+        expect(response).to render_template(:showfollow)
+      end
+    end
+  end
 end

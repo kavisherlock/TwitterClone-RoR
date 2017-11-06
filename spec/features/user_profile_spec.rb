@@ -9,6 +9,9 @@ feature 'User Profile page' do
     expect(page).to have_title "#{user.name}#{PARTIAL_PAGE_TITLE}"
     expect(page).to have_css 'h1', text: user.name
     expect(page).to have_css 'p', text: "@#{user.handle}"
+    expect(page).to have_css 'a', text: '0 Tweats'
+    expect(page).to have_css 'a', text: '0 Following'
+    expect(page).to have_css 'a', text: '0 Followers'
     expect(page).to_not have_css 'a', text: 'Delete'
   end
 end
@@ -66,39 +69,6 @@ feature 'User Edit Profile page' do
   end
 end
 
-feature 'Tweating from the profile page' do
-  scenario 'User tweat shows on page' do
-    user = FactoryGirl.create(:user)
-    visit login_path
-    login_with(user.email, user.password, false)
-    visit "/users/#{user.id}"
-    tweat('content')
-    expect(page).to have_css '.tweat'
-    expect(page).to have_css '.user a', text: user.name
-    expect(page).to have_css '.content', text: 'content'
-    expect(page).to have_css '.timestamp',
-                             text: 'Posted less than a minute ago.'
-    expect(page).to have_css 'a', text: 'Delete'
-  end
-
-  scenario 'User deletes tweat' do
-    user = FactoryGirl.create(:user)
-    visit login_path
-    login_with(user.email, user.password, false)
-    visit "/users/#{user.id}"
-    tweat('content')
-    click_link 'Delete'
-    expect(page).to_not have_css '.tweat'
-  end
-end
-
-def login_with(email, password, remember_me)
-  fill_in 'Email', with: email
-  fill_in 'Password', with: password
-  check 'session_remember_me' if remember_me
-  click_button 'Log in'
-end
-
 def update_to(name, email, handle, password, password_confirmation)
   fill_in 'Name', with: name
   fill_in 'Email', with: email
@@ -106,9 +76,4 @@ def update_to(name, email, handle, password, password_confirmation)
   fill_in 'Password', with: password
   fill_in 'Password confirmation', with: password_confirmation
   click_button 'Save Profile'
-end
-
-def tweat(content)
-  fill_in 'tweat_content', with: content
-  click_button 'Post'
 end

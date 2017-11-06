@@ -1,0 +1,17 @@
+- provide(:title, @title)
+.row
+  %aside.col-md-4
+    = render 'partials/user_profile_info', user: @user
+    %section.stats
+      - if @users.any?
+        .user_avatars
+          - @users.each do |user|
+            = link_to gravatar_for(user, size: 30), user
+  .col-md-8
+    %h3= @title
+    - if @users.any?
+      %ul.users.follow
+        = render @users
+      = will_paginate
+    - else
+      %h3=@emptymessage

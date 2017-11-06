@@ -4,7 +4,7 @@ LOGIN_PAGE_TITLE = 'Log in | NotTwitter'.freeze
 
 feature 'Log in page' do
   scenario 'Log in form' do
-    visit '/login'
+    visit login_path
     expect(page).to have_title LOGIN_PAGE_TITLE
     expect(page).to have_css 'img', class: 'logo'
     expect(page).to have_css 'h1', text: 'WELCOME'
@@ -25,6 +25,7 @@ feature 'Log in page' do
 
   scenario 'Successful log in' do
     user = FactoryGirl.create(:user)
+    visit login_path
     login_with(user.email, user.password, false)
     expect(current_path).to eql(home_path)
     expect(page).to have_content 'Welcome ' + user.name + '!!'
@@ -32,18 +33,21 @@ feature 'Log in page' do
 
   scenario 'Bad email' do
     user = FactoryGirl.create(:user)
+    visit login_path
     login_with('bad email', user.password, false)
     expect(page).to have_content 'Invalid email/password combination'
   end
 
   scenario 'Bad password' do
     user = FactoryGirl.create(:user)
+    visit login_path
     login_with(user.email, 'bad password', false)
     expect(page).to have_content 'Invalid email/password combination'
   end
 
   scenario 'Remember me saves cookies' do
     user = FactoryGirl.create(:user)
+    visit login_path
     login_with(user.email, user.password, true)
     expect(page).to have_content 'Welcome ' + user.name + '!!'
     expect(Capybara.current_session.driver.request.cookies.[]('user_id'))
@@ -53,25 +57,18 @@ feature 'Log in page' do
   end
 
   scenario 'Sign up button' do
-    visit '/login'
+    visit login_path
     click_link 'Not a member yet? Sign up now!'
     expect(current_path).to eql(signup_path)
   end
 
   scenario 'Successful log out' do
     user = FactoryGirl.create(:user)
+    visit login_path
     login_with(user.email, user.password, false)
     expect(current_path).to eql(home_path)
     click_link 'Account'
     click_link 'Log out'
     expect(current_path).to eql(login_path)
-  end
-
-  def login_with(email, password, remember_me)
-    visit login_path
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    check 'session_remember_me' if remember_me
-    click_button 'Log in'
   end
 end

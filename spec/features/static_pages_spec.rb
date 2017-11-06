@@ -18,30 +18,6 @@ feature 'Home Page' do
     expect(page).to have_css 'p', text: "@#{user.handle}"
     expect(page).to have_css 'p', text: "@#{user.handle}"
   end
-
-  scenario 'User tweats through home page' do
-    user = FactoryGirl.create(:user)
-    visit login_path
-    login_with(user.email, user.password, false)
-    visit home_path
-    tweat('content')
-    expect(page).to have_css '.tweat'
-    expect(page).to have_css '.user a', text: user.name
-    expect(page).to have_css '.content', text: 'content'
-    expect(page).to have_css '.timestamp',
-                             text: 'Posted less than a minute ago.'
-    expect(page).to have_css 'a', text: 'Delete'
-  end
-
-  scenario 'User deletes tweat' do
-    user = FactoryGirl.create(:user)
-    visit login_path
-    login_with(user.email, user.password, false)
-    visit home_path
-    tweat('content')
-    click_link 'Delete'
-    expect(page).to_not have_css '.tweat'
-  end
 end
 
 feature 'About Page' do
@@ -101,16 +77,4 @@ feature 'Contact Us Page' do
     expect(page).to have_css 'p', text: 'Phone: not very secure'
     expect(page).to have_css 'p', text: 'SSN: you\'re kidding right?'
   end
-end
-
-def login_with(email, password, remember_me)
-  fill_in 'Email', with: email
-  fill_in 'Password', with: password
-  check 'session_remember_me' if remember_me
-  click_button 'Log in'
-end
-
-def tweat(content)
-  fill_in 'tweat_content', with: content
-  click_button 'Post'
 end
