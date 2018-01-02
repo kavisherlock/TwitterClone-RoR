@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :users
-  resources :tweats, only: [:create, :destroy]
+  resources :dweeds, only: [:create, :destroy]
   resources :users do
     member do
       get :following, :followers

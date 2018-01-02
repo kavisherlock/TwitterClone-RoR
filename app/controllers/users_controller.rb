@@ -1,4 +1,4 @@
-# Used to manage user profiles and tweats
+# Used to manage user profiles and dweeds
 class UsersController < ApplicationController
   USERS_PER_PAGE = 10
   TWEATS_PER_PAGE = 20
@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    @tweat = current_user.tweats.build if logged_in?
-    @tweats = @user.tweats.paginate(page: params[:page],
+    @dweed = current_user.dweeds.build if logged_in?
+    @dweeds = @user.dweeds.paginate(page: params[:page],
                                     per_page: TWEATS_PER_PAGE)
   rescue ActiveRecord::RecordNotFound
     flash[:danger] = 'User not found.'

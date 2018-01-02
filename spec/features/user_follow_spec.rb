@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-PARTIAL_PAGE_TITLE = ' | NotTwitter'.freeze
+PARTIAL_PAGE_TITLE = ' | Dwidder'.freeze
 
 feature 'User following feature' do
   scenario 'Follow and Unfollow button' do
@@ -29,16 +29,16 @@ feature 'User following feature' do
     expect(page).to have_css 'a', text: '1 Following'
   end
 
-  scenario 'Seeing tweats from user you follow' do
+  scenario 'Seeing dweeds from user you follow' do
     user = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user2)
-    tweat = FactoryGirl.create(:tweat)
+    dweed = FactoryGirl.create(:dweed)
     visit login_path
     login_with(user2.email, user2.password, false)
     visit "/users/#{user.id}"
     click_button 'Follow'
     visit home_path
     expect(page).to have_css 'a', text: user.name.to_s
-    expect(page).to have_css 'div', text: tweat.content.to_s
+    expect(page).to have_css 'div', text: dweed.content.to_s
   end
 end

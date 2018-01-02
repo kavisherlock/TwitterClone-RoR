@@ -2,15 +2,15 @@ require 'rails_helper'
 
 MAX_TWEAT_LEN = 140
 
-RSpec.describe Tweat, type: :model do
-  let(:content) { 'This is not a tweet. It\'s a tweat' }
+RSpec.describe Dweed, type: :model do
+  let(:content) { 'This is not a tweet. It\'s a dweed' }
   let(:user) { FactoryGirl.build(:user) }
-  let(:tweat) { user.tweats.build(content: content) }
+  let(:dweed) { user.dweeds.build(content: content) }
 
   describe 'validations' do
-    subject { tweat }
+    subject { dweed }
 
-    context 'tweat is valid' do
+    context 'dweed is valid' do
       it { is_expected.to be_valid }
     end
 
@@ -27,7 +27,7 @@ RSpec.describe Tweat, type: :model do
 
     context 'user id cannot be nil' do
       it do
-        tweat.user_id = nil
+        dweed.user_id = nil
         is_expected.to be_invalid
       end
     end
