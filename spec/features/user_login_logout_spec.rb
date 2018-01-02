@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-LOGIN_PAGE_TITLE = 'Log in | NotTwitter'.freeze
+LOGIN_PAGE_TITLE = 'Log in | Dwidder'.freeze
 
 feature 'Log in page' do
   scenario 'Log in form' do
@@ -9,7 +9,7 @@ feature 'Log in page' do
     expect(page).to have_css 'img', class: 'logo'
     expect(page).to have_css 'h1', text: 'WELCOME'
     expect(page).to have_css 'h1', text: 'TO'
-    expect(page).to have_css 'h1', text: 'NOT TWITTER'
+    expect(page).to have_css 'h1', text: 'DWIDDER'
     expect(page).to have_css 'p', text: 'Just like Twitter, but not Twitter'
     expect(page).to have_css 'h1', text: 'Log in'
     expect(page).to have_css 'label', text: 'Email'

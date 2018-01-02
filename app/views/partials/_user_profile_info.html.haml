@@ -4,8 +4,8 @@
   %p= "@#{user.handle}"
   .stats
     %a{:href => home_path}
-      %strong= user.tweats.count
-      Tweats
+      %strong= user.dweeds.count
+      Dweeds
     %a{:href => "#{following_user_path(user)}"}
       %strong#following= user.following.count
       Following

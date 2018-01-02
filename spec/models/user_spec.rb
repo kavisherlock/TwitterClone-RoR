@@ -8,8 +8,8 @@ MIN_PASSWORD_LEN = 6
 
 RSpec.describe User, type: :model do
   let(:name) { 'Test User' }
-  let(:email) { 'validemail@twitter.com' }
-  let(:invalid_email) { 'invalidemail$twitter.com' }
+  let(:email) { 'validemail@dwidder.com' }
+  let(:invalid_email) { 'invalidemail$dwidder.com' }
   let(:handle) { 'TestUser' }
   let(:password) { 'Password' }
   let(:password_confirmation) { 'Password' }
@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'email cannot be more than 255 characters' do
-      let(:email) { ('a' * (MAX_EMAIL_LEN - 11)) + '@twitter.com' }
+      let(:email) { ('a' * (MAX_EMAIL_LEN - 11)) + '@dwidder.com' }
       it { is_expected.to be_invalid }
     end
 
@@ -175,13 +175,13 @@ RSpec.describe User, type: :model do
   describe 'dependent destroy' do
     context 'user gets destoryed' do
       let(:user) { FactoryGirl.create(:user) }
-      let(:tweat) { user.tweats.build(content: 'content') }
+      let(:dweed) { user.dweeds.build(content: 'content') }
 
-      it 'tweat gets destroyed with user' do
-        expect { user.destroy.to change { Tweat.count }.by(-1) }
+      it 'dweed gets destroyed with user' do
+        expect { user.destroy.to change { Dweed.count }.by(-1) }
       end
 
-      it 'tweat gets destroyed with user' do
+      it 'dweed gets destroyed with user' do
         expect { user.destroy.to change { Relationship.count }.by(-1) }
       end
     end

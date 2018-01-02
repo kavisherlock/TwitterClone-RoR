@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-PARTIAL_PAGE_TITLE = ' | NotTwitter'.freeze
+PARTIAL_PAGE_TITLE = ' | Dwidder'.freeze
 
 feature 'User Profile page' do
   scenario 'User info' do
@@ -9,7 +9,7 @@ feature 'User Profile page' do
     expect(page).to have_title "#{user.name}#{PARTIAL_PAGE_TITLE}"
     expect(page).to have_css 'h1', text: user.name
     expect(page).to have_css 'p', text: "@#{user.handle}"
-    expect(page).to have_css 'a', text: '0 Tweats'
+    expect(page).to have_css 'a', text: '0 Dweeds'
     expect(page).to have_css 'a', text: '0 Following'
     expect(page).to have_css 'a', text: '0 Followers'
     expect(page).to_not have_css 'a', text: 'Delete'

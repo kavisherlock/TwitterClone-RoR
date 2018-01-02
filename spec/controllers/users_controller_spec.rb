@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   let(:id) { 1 }
   let(:name) { 'Test User' }
-  let(:email) { 'validemail@twitter.com' }
+  let(:email) { 'validemail@dwidder.com' }
   let(:handle) { 'TestUser' }
   let(:password) { 'Password' }
   let(:password_confirmation) { 'Password' }

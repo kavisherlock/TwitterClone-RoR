@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20171104014900) do
 
+  create_table "dweeds", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_dweeds_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_dweeds_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followee_id"
@@ -20,15 +29,6 @@ ActiveRecord::Schema.define(version: 20171104014900) do
     t.index ["followee_id"], name: "index_relationships_on_followee_id"
     t.index ["follower_id", "followee_id"], name: "index_relationships_on_follower_id_and_followee_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "tweats", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_tweats_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_tweats_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

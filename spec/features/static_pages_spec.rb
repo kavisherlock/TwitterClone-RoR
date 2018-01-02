@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-PARTIAL_PAGE_TITLE = ' | NotTwitter'.freeze
+PARTIAL_PAGE_TITLE = ' | Dwidder'.freeze
 
 feature 'Home Page' do
   scenario 'Login page if user is not logged in' do
@@ -25,7 +25,7 @@ feature 'About Page' do
     visit about_path
     expect(page).to have_title "About#{PARTIAL_PAGE_TITLE}"
     expect(page).to have_css 'h1', text: 'About'
-    expect(page).to have_css 'p', text: 'NotTwitter is'
+    expect(page).to have_css 'p', text: 'Dwidder is'
     expect(page).to have_css 'h2', text: 'what’s happening in the world.'
     expect(page).to have_css 'p', text: 'See'
     expect(page).to have_css 'h2', text: 'what people are saying.'
@@ -40,7 +40,7 @@ feature 'About Page' do
   scenario 'Sign up button if user is not logged in' do
     visit about_path
     expect(page).to have_css 'p', text: 'Join us now'
-    expect(page).to have_css 'a', text: 'Not Twitter'
+    expect(page).to have_css 'a', text: 'Dwidder'
   end
 
   scenario 'Home button if user is logged in' do
@@ -72,7 +72,7 @@ feature 'Contact Us Page' do
     expect(page).to have_css 'img'
     expect(page).to have_css 'h2', text: 'Kavish R. Munjal'
     expect(page).to have_css 'h4', text: 'Owner and maintaner'
-    expect(page).to have_css 'h3', text: 'kavish@twitter.com'
+    expect(page).to have_css 'h3', text: 'kavish@dwidder.com'
     expect(page).to have_css 'p', text: 'Address: yeah, I don\'t think so'
     expect(page).to have_css 'p', text: 'Phone: not very secure'
     expect(page).to have_css 'p', text: 'SSN: you\'re kidding right?'

@@ -8,7 +8,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #
-class Tweat < ApplicationRecord
+class Dweed < ApplicationRecord
   belongs_to :user
 
   default_scope -> { order(created_at: :desc) }

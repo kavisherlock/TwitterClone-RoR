@@ -1,0 +1,6 @@
+- if logged_in?
+  .new-dweed-block
+    = form_for(@dweed) do |f|
+      .field
+        = f.text_area :content, placeholder: "Compose new dweed...", class: "compose"
+      = f.submit "Post", class: "btn btn-primary"

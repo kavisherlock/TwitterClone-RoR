@@ -1,0 +1,11 @@
+%li.dweed.dweed{:id => "dweed-#{dweed.id}"}
+  = link_to gravatar_for(dweed.user), dweed.user, class: "user-pic"
+  .user
+    %strong= link_to dweed.user.name, dweed.user, class: "user-item"
+  .content
+    = dweed.content
+  .timestamp
+    Posted #{time_ago_in_words(dweed.created_at)} ago.
+    %div
+      - if current_user?(dweed.user)
+        = link_to "Delete", dweed, method: :delete, data: { confirm: "You sure?" }, class: "btn-xs"

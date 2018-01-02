@@ -11,7 +11,7 @@ include SessionsHelper
 #  updated_at           :datetime         not null
 #
 class User < ApplicationRecord
-  has_many :tweats, dependent: :destroy
+  has_many :dweeds, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
@@ -76,7 +76,7 @@ class User < ApplicationRecord
   def feed
     following_ids = "SELECT followee_id FROM relationships
                      WHERE  follower_id = :user_id"
-    Tweat.where("user_id IN (#{following_ids}) OR user_id = :user_id",
+    Dweed.where("user_id IN (#{following_ids}) OR user_id = :user_id",
                 user_id: id)
   end
 

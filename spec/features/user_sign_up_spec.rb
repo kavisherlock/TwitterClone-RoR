@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-SIGNUP_PAGE_TITLE = 'Sign up | NotTwitter'.freeze
+SIGNUP_PAGE_TITLE = 'Sign up | Dwidder'.freeze
 
 feature 'Sign up page' do
   scenario 'Sign up form' do
