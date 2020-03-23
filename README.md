@@ -1,4 +1,4 @@
-# Dwidder
+# TwitterClone
 
 This application allows users to create profiles and post content,
 called Dweeds (not to be confused with Tweets), on their walls
